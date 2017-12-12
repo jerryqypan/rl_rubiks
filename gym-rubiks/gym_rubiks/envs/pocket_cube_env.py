@@ -69,6 +69,42 @@ class PocketCube5Env(gym.Env):
         #return
         ...
 
+class PocketCube6Env(gym.Env):
+    metadata = {'render.modes': ['human']}
+
+    def __init__(self):
+        self.actions = ["R","R'","R2","U","U'","U2","F","F'","F2"]
+        self.action_space = spaces.Discrete(len(self.actions))
+        self.observation_space = spaces.Box(0,5,(6,2,2))
+        self.cube = pc.Cube()
+        self.state = cubeto2x2(cube2np(self.cube))
+        self.edgereward = []
+
+
+    def _step(self, action):
+        self.cube(self.actions[action])
+        self.state = cubeto2x2(cube2np(self.cube))
+        done = check_finished(self.state)
+        reward = 100.0 if done else -1.0
+        return self.state,reward,done,self.cube
+
+
+    def _reset(self):
+        done = True
+        self.edgereward = []
+        while done:
+            shuffle = ' '.join(np.random.choice(self.actions, 6))
+            self.cube = pc.Cube()
+            self.cube(shuffle)
+            self.state = cubeto2x2(cube2np(self.cube))
+            done = check_finished(self.state)
+        return self.state
+
+    def _render(self, mode='human', close=False):
+        #print(self.state)
+        #return
+        ...
+
 class PocketCube7Env(gym.Env):
     metadata = {'render.modes': ['human']}
 
@@ -130,6 +166,42 @@ class PocketCube8Env(gym.Env):
         self.edgereward = []
         while done:
             shuffle = ' '.join(np.random.choice(self.actions, 8))
+            self.cube = pc.Cube()
+            self.cube(shuffle)
+            self.state = cubeto2x2(cube2np(self.cube))
+            done = check_finished(self.state)
+        return self.state
+
+    def _render(self, mode='human', close=False):
+        #print(self.state)
+        #return
+        ...
+
+class PocketCube9Env(gym.Env):
+    metadata = {'render.modes': ['human']}
+
+    def __init__(self):
+        self.actions = ["R","R'","R2","U","U'","U2","F","F'","F2"]
+        self.action_space = spaces.Discrete(len(self.actions))
+        self.observation_space = spaces.Box(0,5,(6,2,2))
+        self.cube = pc.Cube()
+        self.state = cubeto2x2(cube2np(self.cube))
+        self.edgereward = []
+
+
+    def _step(self, action):
+        self.cube(self.actions[action])
+        self.state = cubeto2x2(cube2np(self.cube))
+        done = check_finished(self.state)
+        reward = 100.0 if done else -1.0
+        return self.state,reward,done,self.cube
+
+
+    def _reset(self):
+        done = True
+        self.edgereward = []
+        while done:
+            shuffle = ' '.join(np.random.choice(self.actions, 9))
             self.cube = pc.Cube()
             self.cube(shuffle)
             self.state = cubeto2x2(cube2np(self.cube))

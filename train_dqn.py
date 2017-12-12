@@ -47,14 +47,14 @@ def train_constant(shuffle, model='', n_episodes=10000):
         while not done and t < max_episode_len:
             # Uncomment to watch the behaviour
             # env.render()
-            action,q_value = agent.act_and_train(obs, reward)
+            action,q_value = agent.act_and_train(obs, reward) #changed function to return q value
             obs, reward, done, _ = env.step(action)
             R += reward
             t += 1
             Q += q_value
         reward_array.append(R)
         qval_array.append(Q/t)
-        if i % 100 == 0:
+        if i % 1000 == 0:
             print('episode:', i,
                   'R:', R,
                   'statistics:', agent.get_statistics())

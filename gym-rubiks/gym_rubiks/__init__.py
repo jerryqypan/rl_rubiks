@@ -9,7 +9,10 @@ register(
     id='rubiks-2x2-5-v0',
     entry_point='gym_rubiks.envs:PocketCube5Env',
 )
-
+register(
+    id='rubiks-2x2-6-v0',
+    entry_point='gym_rubiks.envs:PocketCube6Env',
+)
 register(
     id='rubiks-2x2-7-v0',
     entry_point='gym_rubiks.envs:PocketCube7Env',
@@ -17,6 +20,10 @@ register(
 register(
     id='rubiks-2x2-8-v0',
     entry_point='gym_rubiks.envs:PocketCube8Env',
+)
+register(
+    id='rubiks-2x2-9-v0',
+    entry_point='gym_rubiks.envs:PocketCube9Env',
 )
 register(
     id='rubiks-2x2-10-v0',
