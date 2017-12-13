@@ -28,15 +28,16 @@ def setup_dqn(env):
 
 
 def train_constant(shuffle, model='', n_episodes=10000):
-    env = gym_rubiks.make("rubiks-2x2-"+str(shuffle) + '-v0')
+    env = gym_rubiks.make("rubiks-2x2-"+str(100) + '-v0')
     agent = setup_dqn(env)
     total_episodes = n_episodes
     max_episode_len = 15
     reward_array = []
     qval_array = []
     if model != '':
-        agent.load(model)
-        total_episodes += int(model.split('_')[2])
+        agent.load('agent_'+str(shuffle)+'_10000')
+        #total_episodes += int(model.split('_')[2])
+        total_episodes += 10000
     for i in range(1, n_episodes + 1):
         obs = env.reset()
         reward = 0
